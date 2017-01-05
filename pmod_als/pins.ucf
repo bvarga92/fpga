@@ -1,0 +1,29 @@
+NET "clk" LOC = "V10";
+NET "rst" LOC = "B8"; #kozepso nyomogomb
+
+NET "led[7]" LOC = "T11";
+NET "led[6]" LOC = "R11";
+NET "led[5]" LOC = "N11";
+NET "led[4]" LOC = "M11";
+NET "led[3]" LOC = "V15";
+NET "led[2]" LOC = "U15";
+NET "led[1]" LOC = "V16";
+NET "led[0]" LOC = "U16";
+
+NET "an[0]" LOC = "N16";
+NET "an[1]" LOC = "N15";
+NET "an[2]" LOC = "P18";
+NET "an[3]" LOC = "P17";
+NET "seg[0]" LOC = "T17";
+NET "seg[1]" LOC = "T18";
+NET "seg[2]" LOC = "U17";
+NET "seg[3]" LOC = "U18";
+NET "seg[4]" LOC = "M14";
+NET "seg[5]" LOC = "N14";
+NET "seg[6]" LOC = "L14";
+NET "seg[7]" LOC = "M13";
+
+## A PmodALS modult az A port felso reszebe kell csatlakoztatni
+NET "cs" LOC = "T12";
+NET "sck" LOC = "P11";
+NET "sdo" LOC = "N10";

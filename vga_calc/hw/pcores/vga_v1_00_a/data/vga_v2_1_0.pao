@@ -1,0 +1,5 @@
+lib proc_common_v3_00_a  all 
+lib axi_lite_ipif_v1_01_a  all 
+lib vga_v1_00_a user_logic verilog
+lib vga_v1_00_a dp_bram_16384x8 verilog
+lib vga_v1_00_a vga vhdl

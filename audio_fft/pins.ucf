@@ -1,0 +1,40 @@
+NET "clk" LOC = "V10";
+NET "rst" LOC = "B8";
+
+NET "sw[7]" LOC = "T5";
+NET "sw[6]" LOC = "V8";
+NET "sw[5]" LOC = "U8";
+NET "sw[4]" LOC = "N8";
+NET "sw[3]" LOC = "M8";
+NET "sw[2]" LOC = "V9";
+NET "sw[1]" LOC = "T9";
+NET "sw[0]" LOC = "T10";
+
+NET "led[7]" LOC = "T11";
+NET "led[6]" LOC = "R11";
+NET "led[5]" LOC = "N11";
+NET "led[4]" LOC = "M11";
+NET "led[3]" LOC = "V15";
+NET "led[2]" LOC = "U15";
+NET "led[1]" LOC = "V16";
+NET "led[0]" LOC = "U16";
+
+NET "ledmtx_rowaddr[2]" LOC = "K1";  
+NET "ledmtx_rowaddr[1]" LOC = "V12";  
+NET "ledmtx_rowaddr[0]" LOC = "K2";  
+NET "ledmtx_clk" LOC = "L4";
+NET "ledmtx_oe" LOC = "L3"; 
+NET "ledmtx_lat" LOC = "P11"; 
+NET "ledmtx_r1" LOC = "N9"; 
+NET "ledmtx_g1" LOC = "U11"; 
+NET "ledmtx_b1" LOC = "M10"; 
+NET "ledmtx_r2" LOC = "J1"; 
+NET "ledmtx_g2" LOC = "V11"; 
+NET "ledmtx_b2" LOC = "J3";
+
+NET "adc_cs" LOC = "G11";
+NET "adc_sck" LOC = "E11";
+NET "adc_d0" LOC = "F10";
+NET "adc_d1" LOC = "F11";
+
+NET "debug" LOC = "H3";

@@ -1,0 +1,4 @@
+lib proc_common_v3_00_a  all 
+lib axi_lite_ipif_v1_01_a  all 
+lib led_sw_v1_00_a user_logic verilog
+lib led_sw_v1_00_a led_sw vhdl
