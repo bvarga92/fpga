@@ -15,7 +15,7 @@ NET "mic_sck" LOC = "P11";
 NET "mic_ss" LOC = "T12";
 NET "mic_miso" LOC = "N10";
 
-##A PmodI2S modult a D port felso reszebe kell csatlakoztatni.
+## A PmodI2S modult a D port felso reszebe kell csatlakoztatni.
 NET "i2s_mclk" LOC = "G11";
 NET "i2s_lrck" LOC = "F10";
 NET "i2s_sck" LOC = "F11";
