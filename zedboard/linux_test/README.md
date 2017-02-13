@@ -4,4 +4,4 @@ A PetaLinux fordítása nagyrészt az alapértelmezett beállításokkal törté
 
 A fordítás végeztével az SDK-ban boot image-et kell generálni az FSBL alkalmazás ELF fájljából, a hardver BIT fájlból, és az u-boot.elf-ből. Az így kapott *BOOT.bin* fájlt szintén fel kell másolni az SD kártyára.
 
-A *gpio.c* fájl a LED-ek, kapcsolók és nyomógombok programból történő kezelésére mutat példát.
+A *drv/gpio* a LED-ek, kapcsolók és nyomógombok programból történő kezelésére mutat példát. A *drv/gpio_kernel* egy betölthető kernel modult tartalmaz, amely a LED-eken számolja a másodperceket.
