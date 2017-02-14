@@ -29,6 +29,12 @@ void init(void){
 	}
 }
 
+void deinit(void){
+	munmap(led,getpagesize());
+	munmap(sw,getpagesize());
+	munmap(btn,getpagesize());
+}
+
 void write_led(uint32_t value){
 	*led=value&0xFF;
 }
@@ -51,6 +57,6 @@ int main(int argc, char** argv){
 		write_led(strtol(argv[2],NULL,10));
 	else
 		printf("Usage: \"gpio sw\" or \"gpio btn\" or \"gpio led value\".\n\n");
+	deinit();
 	return 0;
 }
-
