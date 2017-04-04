@@ -6,4 +6,4 @@ A fordítás végeztével az SDK-ban boot image-et kell generálni az FSBL alkal
 
 A *drv/gpio* a LED-ek, kapcsolók és nyomógombok programból történő kezelésére mutat példát. A *drv/gpio_kernel* egy betölthető kernel modult tartalmaz, amely a LED-eken számolja a másodperceket (betöltés `insmod`, eltávolítás `rmmod`).
 
-![Block Design](https://github.com/bvarga92/fpga/raw/master/zedboard/linux_test/design.png)
+![Block Design](https://github.com/bvarga92/fpga/raw/main/zedboard/linux_test/design.png)
