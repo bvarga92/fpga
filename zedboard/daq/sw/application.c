@@ -15,18 +15,16 @@ struct udp_pcb *daqPCB;
 ip_addr_t daqIP;
 uint16_t daqPort;
 uint8_t buffer[N<<1];
-uint8_t sw;
 
-int transfer_data(){
+void transfer_data(){
 	struct pbuf *p;
-	if((!daqFlag)||(!dataAvailable)) return 0;
+	if((!daqFlag)||(!dataAvailable)) return;
 	dataAvailable=0;
 	p=pbuf_alloc(PBUF_TRANSPORT,N,PBUF_REF);
 	p->payload=(void*)rxBuffer;
 	Xil_DCacheInvalidateRange((uintptr_t)rxBuffer,N);
 	udp_sendto(daqPCB,p,&daqIP,daqPort);
 	pbuf_free(p);
-	return 0;
 }
 
 void print_app_header(){

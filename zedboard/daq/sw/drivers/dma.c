@@ -43,7 +43,7 @@ void RxIntrHandler(void* Callback){
 			rxBuffer=ptr1;
 			addr=ptr2;
 		}
-		XAxiDma_SimpleTransfer(&AxiDma,(uintptr_t)addr,rxBytes,XAXIDMA_DEVICE_TO_DMA);
+		XAxiDma_SimpleTransfer(&AxiDmaInst,(uintptr_t)addr,rxBytes,XAXIDMA_DEVICE_TO_DMA);
 	}
 }
 
