@@ -14,7 +14,7 @@ int main(){
 	struct ip_addr ipaddr, netmask, gw;
 	uint8_t mac[6]={0x00,0x0a,0x35,0x00,0x01,0x02};
 	init_platform();
-	IP4_ADDR(&ipaddr,  192, 168,   1, 155);
+	IP4_ADDR(&ipaddr,  192, 168,   1,  55);
 	IP4_ADDR(&netmask, 255, 255, 255,   0);
 	IP4_ADDR(&gw,      192, 168,   1,   1);
 	print_app_header();
