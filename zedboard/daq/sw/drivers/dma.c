@@ -15,9 +15,9 @@ void dmaInit(uint8_t* buf, uint32_t buf_size){
 	rxBytes=buf_size;
 	CfgPtr=XAxiDma_LookupConfig(XPAR_AXIDMA_0_DEVICE_ID);
 	XAxiDma_CfgInitialize(&AxiDma,CfgPtr);
+	XAxiDma_Reset(&AxiDma);
 	XAxiDma_IntrDisable(&AxiDma,XAXIDMA_IRQ_ALL_MASK,XAXIDMA_DEVICE_TO_DMA);
 	XAxiDma_IntrDisable(&AxiDma,XAXIDMA_IRQ_ALL_MASK,XAXIDMA_DMA_TO_DEVICE);
-	XAxiDma_Reset(&AxiDma);
 }
 
 void dmaReceive(){
@@ -26,7 +26,7 @@ void dmaReceive(){
 	Xil_DCacheInvalidateRange((uintptr_t)rxBuffer,rxBytes);
 }
 
-void RxIntrHandler(void* Callback){
+static void RxIntrHandler(void* Callback){
 	void* addr;
 	uint32_t irqStatus;
 	XAxiDma *AxiDmaInst=(XAxiDma*)Callback;
@@ -43,7 +43,7 @@ void RxIntrHandler(void* Callback){
 			rxBuffer=ptr1;
 			addr=ptr2;
 		}
-		XAxiDma_SimpleTransfer(&AxiDmaInst,(uintptr_t)addr,rxBytes,XAXIDMA_DEVICE_TO_DMA);
+		XAxiDma_SimpleTransfer(AxiDmaInst,(uintptr_t)addr,rxBytes,XAXIDMA_DEVICE_TO_DMA);
 	}
 }
 
@@ -55,6 +55,7 @@ void dmaInitIT(uint8_t* buf, uint32_t transfer_size){
 	rxBytes=transfer_size;
 	CfgPtr=XAxiDma_LookupConfig(XPAR_AXIDMA_0_DEVICE_ID);
 	XAxiDma_CfgInitialize(&AxiDma,CfgPtr);
+	XAxiDma_Reset(&AxiDma);
 	XAxiDma_IntrDisable(&AxiDma,XAXIDMA_IRQ_ALL_MASK,XAXIDMA_DMA_TO_DEVICE);
 	XAxiDma_IntrDisable(&AxiDma,XAXIDMA_IRQ_ALL_MASK,XAXIDMA_DEVICE_TO_DMA);
 	XScuGic_RegisterHandler(XPAR_SCUGIC_0_CPU_BASEADDR,XPAR_FABRIC_AXI_DMA_0_S2MM_INTROUT_INTR,RxIntrHandler,&AxiDma);

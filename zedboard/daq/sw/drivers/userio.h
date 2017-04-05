@@ -5,6 +5,9 @@
 
 	/* az atadott erteknek megfeleloen allitja be a LED-eket */
 	void setLED(uint8_t val);
+
+	/* visszaadja a LED-ek aktualis erteket */
+	uint8_t getLED(void);
 	
 	/* visszaadja a 8 kapcsolo allapotat */
 	uint8_t getSW(void);

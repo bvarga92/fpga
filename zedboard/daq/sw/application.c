@@ -5,16 +5,17 @@
 #include "drivers/codec.h"
 #include "drivers/dma.h"
 #include "drivers/fir.h"
+#include "drivers/fir_coeffs.h"
 #include "xil_cache.h"
 
 #define PORT   1234
 #define N      1024
 
-uint8_t daqFlag=0;
-struct udp_pcb *daqPCB;
-ip_addr_t daqIP;
-uint16_t daqPort;
-uint8_t buffer[N<<1];
+static uint8_t daqFlag=0;
+static struct udp_pcb *daqPCB;
+static ip_addr_t daqIP;
+static uint16_t daqPort;
+static uint8_t buffer[N<<1];
 
 void transfer_data(){
 	struct pbuf *p;
@@ -31,7 +32,7 @@ void print_app_header(){
 	xil_printf("\n\r\n\r---------- ETHERNET AUDIO DAQ ----------\n\r");
 }
 
-void recv_callback(void *arg, struct udp_pcb *pcb, struct pbuf *p, ip_addr_t *addr, uint16_t port){
+static void recv_callback(void *arg, struct udp_pcb *pcb, struct pbuf *p, ip_addr_t *addr, uint16_t port){
 	uint8_t b=*((uint8_t*)(p->payload));
 	if(b==0x00){
 		daqFlag=1;
@@ -39,10 +40,12 @@ void recv_callback(void *arg, struct udp_pcb *pcb, struct pbuf *p, ip_addr_t *ad
 		daqIP=*addr;
 		daqPort=port;
 		xil_printf("Data acquisition started.\n\r");
+		setLED(getLED()|0x80);
 	}
 	else if(b==0x01){
 		daqFlag=0;
 		xil_printf("Data acquisition stopped.\n\r");
+		setLED(getLED()&0x7F);
 	}
 	pbuf_free(p);
 }
@@ -62,9 +65,9 @@ int start_application(){
 	udp_recv(pcb,recv_callback,NULL);
 	xil_printf("UDP server started at port %d.\n\r",PORT);
 	dmaInitIT(buffer,N);
+	setLED(0);
 	firSetTLAST(N>>2);
 	codecInit();
 	xil_printf("Hardware initialization complete.\n\r");
-	setLED(0);
 	return 0;
 }

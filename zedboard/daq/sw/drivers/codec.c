@@ -2,14 +2,14 @@
 #include "xparameters.h"
 #include "xiic_l.h"
 
-void i2c_init(void){
+static void i2c_init(void){
 	XIic_WriteReg(XPAR_IIC_0_BASEADDR,XIIC_RESETR_OFFSET,XIIC_RESET_MASK);
 	XIic_WriteReg(XPAR_IIC_0_BASEADDR,XIIC_RFD_REG_OFFSET,0x0F);
 	XIic_WriteReg(XPAR_IIC_0_BASEADDR,XIIC_CR_REG_OFFSET,XIIC_CR_TX_FIFO_RESET_MASK);
 	XIic_WriteReg(XPAR_IIC_0_BASEADDR,XIIC_CR_REG_OFFSET,XIIC_CR_ENABLE_DEVICE_MASK);
 }
 
-void i2c_write(uint16_t address, uint8_t data){
+static void i2c_write(uint16_t address, uint8_t data){
 	while(!(XIic_ReadReg(XPAR_IIC_0_BASEADDR,XIIC_SR_REG_OFFSET)&XIIC_SR_RX_FIFO_EMPTY_MASK))
 		XIic_ReadReg(XPAR_IIC_0_BASEADDR,XIIC_DRR_REG_OFFSET);
 	while(!(XIic_ReadReg(XPAR_IIC_0_BASEADDR,XIIC_SR_REG_OFFSET)&XIIC_SR_TX_FIFO_EMPTY_MASK)) ;
@@ -21,7 +21,7 @@ void i2c_write(uint16_t address, uint8_t data){
 	while(!(XIic_ReadReg(XPAR_IIC_0_BASEADDR,XIIC_SR_REG_OFFSET)&XIIC_SR_TX_FIFO_EMPTY_MASK)) ;
 }
 
-uint8_t i2c_read(uint16_t address){
+static uint8_t i2c_read(uint16_t address){
 	while(!(XIic_ReadReg(XPAR_IIC_0_BASEADDR,XIIC_SR_REG_OFFSET)&XIIC_SR_RX_FIFO_EMPTY_MASK))
 		XIic_ReadReg(XPAR_IIC_0_BASEADDR,XIIC_DRR_REG_OFFSET);
 	while(!(XIic_ReadReg(XPAR_IIC_0_BASEADDR,XIIC_SR_REG_OFFSET)&XIIC_SR_TX_FIFO_EMPTY_MASK)) ;
