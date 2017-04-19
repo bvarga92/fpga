@@ -15,10 +15,21 @@ static uint8_t daqFlag=0;
 static struct udp_pcb *daqPCB;
 static ip_addr_t daqIP;
 static uint16_t daqPort;
-static uint8_t buffer[N<<1];
+static uint8_t buffer[N*2];
+static uint8_t sw;
+
+static void configFilter(uint8_t c){
+	uint8_t ledH=getLED()&0xF8;
+	switch(c){
+		case 1:  firSetCoeffs(256,coeffs256); firSetDecimationFactor(2); setLED(ledH|1); break;
+		case 2:  firSetCoeffs(512,coeffs512); firSetDecimationFactor(4); setLED(ledH|2); break;
+		default: firSetCoeffs(128,coeffs128); firSetDecimationFactor(1); setLED(ledH); break;
+	}
+}
 
 void transfer_data(){
 	struct pbuf *p;
+	uint8_t sw2;
 	if((!daqFlag)||(!dataAvailable)) return;
 	dataAvailable=0;
 	p=pbuf_alloc(PBUF_TRANSPORT,N,PBUF_REF);
@@ -26,6 +37,11 @@ void transfer_data(){
 	Xil_DCacheInvalidateRange((uintptr_t)rxBuffer,N);
 	udp_sendto(daqPCB,p,&daqIP,daqPort);
 	pbuf_free(p);
+	sw2=getSW()&0x03;
+	if(sw!=sw2){
+		sw=sw2;
+		configFilter(sw);
+	}
 }
 
 void print_app_header(){
@@ -67,6 +83,8 @@ int start_application(){
 	dmaInitIT(buffer,N);
 	setLED(0);
 	firSetTLAST(N>>2);
+	sw=getSW()&0x03;
+	configFilter(sw);
 	codecInit();
 	xil_printf("Hardware initialization complete.\n\r");
 	return 0;
