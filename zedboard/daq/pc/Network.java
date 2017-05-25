@@ -9,7 +9,7 @@ public class Network{
 
 	private Control ctrl=null;
 	private DatagramSocket socket=null;
-	private volatile byte[] recvBuffer;
+	private volatile byte[] recvBuffer=null;
 	private boolean started=false;
 	private InetAddress ip;
 	private int port;
@@ -17,7 +17,7 @@ public class Network{
 	Network(Control c){
 		ctrl=c;
 	}
-	
+
 	private class UDPThread implements Runnable{ 
 		public void run(){
 			int[] data1 = new int[128];
@@ -32,7 +32,7 @@ public class Network{
 						data1[i]=((recvBuffer[(i<<3)+3]&0xFF)<<24)|((recvBuffer[(i<<3)+2]&0xFF)<<16)|((recvBuffer[(i<<3)+1]&0xFF)<<8)|(recvBuffer[(i<<3)+0]&0xFF);
 						data2[i]=((recvBuffer[(i<<3)+7]&0xFF)<<24)|((recvBuffer[(i<<3)+6]&0xFF)<<16)|((recvBuffer[(i<<3)+5]&0xFF)<<8)|(recvBuffer[(i<<3)+4]&0xFF);
 					}
-					ctrl.displayData(data1,data2);
+					ctrl.addData(data1,data2);
 				}
 			}
 			catch(IOException e){
@@ -68,7 +68,7 @@ public class Network{
 
 		System.out.println("Started at port " + socket.getLocalPort() + ".");
 	}
-	
+
 	public void stop(){
 		if(!started){
 			System.out.println("Not started.");
