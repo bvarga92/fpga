@@ -1,5 +1,5 @@
 # Projektek ZedBoardra
 
-- **daq**: hangfrekvenciás jelfeldolgozó és adatgyűjtő eszköz Ethernet interfésszel
+- **daq**: hangfrekvenciás jelfeldolgozó és adatgyűjtő eszköz Ethernet interfésszel ([videó](https://www.youtube.com/watch?v=5IqEOu28NTM&list=PL9_VlVdB8s882QMHiqJlDpJeKWxwP5CIG))
 - **first**: helloworld projekt, számol a LED-eken
 - **linux_test**: SD kártyáról bootolható PetaLinux + a GPIO perifériák kezelése
