@@ -9,7 +9,6 @@ public class Network{
 
 	private Control ctrl=null;
 	private DatagramSocket socket=null;
-	private volatile byte[] recvBuffer=null;
 	private boolean started=false;
 	private InetAddress ip;
 	private int port;
@@ -24,7 +23,7 @@ public class Network{
 			int[] data2 = new int[128];
 			try{
 				while(true){
-					recvBuffer = new byte[1024];
+					byte[] recvBuffer = new byte[1024];
 					DatagramPacket recvPacket = new DatagramPacket(recvBuffer,recvBuffer.length);
 					socket.receive(recvPacket);
 					//System.out.println("Received "+recvPacket.getLength()+" byte(s) of data.");
@@ -65,7 +64,6 @@ public class Network{
 			System.out.println(e);
 			System.exit(0);
 		}
-
 		System.out.println("Started at port " + socket.getLocalPort() + ".");
 	}
 
