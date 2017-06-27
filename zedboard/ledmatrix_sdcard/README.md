@@ -1,1 +1,1 @@
-![photo](https://github.com/bvarga92/fpga/raw/main/zedboard/ledmatrix_sdcard/photo.jpg)
+![photo](https://raw.githubusercontent.com/bvarga92/fpga/main/zedboard/ledmatrix_sdcard/photo.jpg)
