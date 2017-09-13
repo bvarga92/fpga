@@ -12,4 +12,4 @@ Az egyes projektekben található .ucf fájlok a [Digilent Nexys 3](https://www.xil
 - **knightrider.v** és **knightrider.vhd**: futófény Verilog és VHDL nyelven
 - **rotary_encoder.v**: inkrementális szögadó kezelése
 - **uart.v**: UART adó (115200 bps, 8 adatbit, páratlan paritás, 1 stopbit)
-- **verilog_beautifier.php**: syntax highlighter a Verilog nyelvhez
+- **verilog_beautifier.php**: syntax highlighter a Verilog nyelvhez ([próba](https://home.sch.bme.hu/~bvarga92/upload/_labor/verilog_beautifier.php))
