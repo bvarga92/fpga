@@ -7,4 +7,4 @@
 - **linux_test**: SD kártyáról bootolható PetaLinux + a GPIO perifériák kezelése
 - **oled_test**: a panelen található OLED kijelző vezérlése szoftverből
 - **ov7670_vga**: az OV7670 kamera képének átjátszása VGA kimenetre
-- **ov7670_vga_filter**: az OV7670 kamera képének valós idejű feldolgozása (3x3-as lineáris szűrés)
+- **ov7670_vga_filter**: az OV7670 kamera képének valós idejű feldolgozása (3x3-as lineáris szűrés) ([videó](https://www.youtube.com/watch?v=2LrAhVrCXnU&list=PL9_VlVdB8s882QMHiqJlDpJeKWxwP5CIG))
