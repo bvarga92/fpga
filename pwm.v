@@ -4,8 +4,8 @@ module pwm #(
 	parameter CLK_DIV=391,
 	parameter CNTR_BITS=8 // f=fclk/(CLK_DIV*2^CNTR_BITS)
 )(
-	input                   clk,
-	input                   rst,
+	input                  clk,
+	input                  rst,
 	input  [CNTR_BITS-1:0] duty0, // D=duty/(2^CNTR_BITS-1)
 	input  [CNTR_BITS-1:0] duty1,
 	input  [CNTR_BITS-1:0] duty2,
