@@ -11,6 +11,7 @@ Az egyes projektekben található .ucf fájlok a [Digilent Nexys 3](https://www.xil
 - **zedboard**: a [ZedBoard](http://zedboard.org/product/zedboard) Zynq SoPC fejleszõkártyára készült projektek
 - **cntr_sec.v** és **cntr_sec.vhd**: másodpercszámláló Verilog és VHDL nyelven
 - **knightrider.v** és **knightrider.vhd**: futófény Verilog és VHDL nyelven
+- **pwm.v**: paraméterezhetõ, 8 csatornás PWM modul
 - **rotary_encoder.v**: inkrementális szögadó kezelése
 - **uart.v**: UART adó (115200 bps, 8 adatbit, páratlan paritás, 1 stopbit)
 - **verilog_beautifier.php**: syntax highlighter a Verilog nyelvhez ([próba](https://home.sch.bme.hu/~bvarga92/upload/_labor/verilog_beautifier.php))
