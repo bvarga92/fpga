@@ -1,7 +1,8 @@
 # FPGA projektek és vegyes HDL modulok
 
-Az egyes projektekben található .ucf fájlok a [Digilent Nexys 3](https://www.xilinx.com/products/boards-and-kits/1-27b7nm.html) fejlesztõkártyához érvényesek.
+Az egyes projektekben található .ucf fájlok a [Digilent Nexys 3](https://www.xilinx.com/products/boards-and-kits/1-27b7nm.html) (Spartan-6) fejlesztõkártyához érvényesek.
 
+- **cmoda7**: projektek a [Digilent Cmod A7-35T](https://www.xilinx.com/products/boards-and-kits/1-f3zdsm.html) (Artix-7) fejlesztõkártyára
 - **pmodAD1_audio_fft**: 64 pontos audio spektrumanalizátor RGB LED mátrix kijelzéssel, PmodAD1 ADC modullal ([videó](https://www.youtube.com/watch?v=fEciQDGBcTs&list=PL9_VlVdB8s882QMHiqJlDpJeKWxwP5CIG))
 - **pmodALS_test**: mintaprojekt a Digilent PmodALS megvilágításmérõ modulhoz
 - **pmodDA4_dds**: kétcsatornás DDS jelgenerátor PmodDA4 DAC modullal ([videó](https://www.youtube.com/watch?v=8Ri7BkQX_lQ&list=PL9_VlVdB8s882QMHiqJlDpJeKWxwP5CIG))
