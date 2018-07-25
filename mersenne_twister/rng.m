@@ -28,9 +28,9 @@ for ii=2:n
 end
 
 %% generalas
-N=10000;
-rnd=zeros(1,N,'uint32');
-for asdf=1:N
+samplesToGenerate=10000;
+rnd=zeros(1,samplesToGenerate,'uint32');
+for jj=1:samplesToGenerate
     if idx>n
         for ii=1:n
             x=bitand(MT(ii),upper_mask,'uint32')+bitand(MT(mod(ii,n)+1),lower_mask,'uint32');
@@ -50,13 +50,13 @@ for asdf=1:N
     x=bitxor(x,bitshift(x,-l,'uint32'),'uint32');
     x=bitand(x,bitshift(1,w)-1);
     idx=idx+1;
-    rnd(asdf)=x;
+    rnd(jj)=x;
 end
 
 %% abrazolas
 figure(1);
 subplot(121);
 plot(rnd);
-xlim([1 N]);
+xlim([1 samplesToGenerate]);
 subplot(122);
 hist(double(rnd),100);
