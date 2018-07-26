@@ -10,37 +10,24 @@ module rng #(
 	output reg[31:0] rand_out
 );
 
-	parameter N=624;
-	parameter M=397;
-	parameter UPPER_MASK='h80000000;
-	parameter LOWER_MASK='h7FFFFFFF;
-	parameter A='h9908B0DF;
-	parameter U=11;
-	parameter S=7;
-	parameter B='h9D2C5680;
-	parameter T=15;
-	parameter C='hEFC60000;
-	parameter L=18;
-	parameter F=1812433253;
-
-	reg[$clog2(N)-1:0] cntr;
+	reg[9:0] cntr;
 	always@(posedge clk)
-		cntr<=(rst|start|(cntr==N-1))?0:(cntr+1);
+		cntr<=(rst|start|(cntr==623))?0:(cntr+1);
 
 	reg init_done;
 	always@(posedge clk)
 		if(rst)
 			init_done<=0;
-		else if(cntr==N-1)
+		else if(cntr==623)
 			init_done<=1;
 
-	reg[31:0] mt[0:N-1];
+	reg[31:0] mt[0:623]; //ez 20 ezer slice FF... esetleg at lehet irni BRAM alapura
 	reg[31:0] x;
-	reg[$clog2(N)-1:0] idx;
+	reg[9:0] idx;
 	always@(posedge clk)
 		if(rst)
 		begin
-			idx<=N;
+			idx<=624;
 			valid<=0;
 		end
 		else if(start)
@@ -49,25 +36,29 @@ module rng #(
 			if(cntr==0)
 				mt[0]<=SEED;
 			else
-				mt[cntr]<=(mt[cntr-1]^(mt[cntr-1]>>30))*F+cntr;
+				mt[cntr]<={mt[cntr-1][31:2],mt[cntr-1][1:0]^mt[cntr-1][31:30]}*32'h6C078965+cntr;
 		else if(~valid)
-			if(idx>=N)
-				begin
-					mt[cntr]<=mt[(cntr+M)%N]^(((mt[cntr]&UPPER_MASK)|(mt[(cntr+1)%N]&LOWER_MASK))>>1)^((mt[(cntr+1)%N]&1)?A:0);
-					if(cntr==N-1) idx<=0;
-				end
+			if(idx==624)
+					if(cntr<227)
+						mt[cntr]<=mt[cntr+397]^{1'b0,mt[cntr][31],mt[cntr+1][30:1]}^(mt[cntr+1][0]?32'h9908B0DF:0);
+					else if(cntr<623)
+						mt[cntr]<=mt[cntr-227]^{1'b0,mt[cntr][31],mt[cntr+1][30:1]}^(mt[cntr+1][0]?32'h9908B0DF:0);
+					else
+					begin
+						mt[623]<=mt[396]^{1'b0,mt[623][31],mt[0][30:1]}^(mt[0][0]?32'h9908B0DF:0);
+						idx<=0;
+					end
 			else
-				case(cntr)
-					0: x<=mt[idx];
-					1: x<=x^(x>>U);
-					2: x<=x^((x<<S)&B);
-					3: x<=x^((x<<T)&C);
-					4: begin rand_out<=x^(x>>L); idx<=idx+1; valid<=1; end
+				case(cntr[1:0])
+					0: x<={mt[idx][31:21],mt[idx][20:0]^mt[idx][31:11]};
+					1: x[31:7]<=x[31:7]^(x[24:0]&25'h13A58AD);
+					2: x[31:15]<=x[31:15]^(x[16:0]&17'h1DF8C);
+					3: begin rand_out<={x[31:14],x[13:0]^x[31:18]}; idx<=idx+1; valid<=1; end
 				endcase
 
 	task print_mt;
 		integer i;
-		for(i=0;i<N;i=i+1) $display("%d",mt[i]);
+		for(i=0;i<624;i=i+1) $display("%d",mt[i]);
 	endtask
 
 endmodule

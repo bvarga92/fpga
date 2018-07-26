@@ -29,8 +29,8 @@ module rng_tb;
 		@(posedge uut.init_done) ;
 		$display("Inicializalas kesz. Az MT tomb tartalma:");
 		uut.print_mt;
-		$display("\nAz elso 100 kimenet:");
-		for(i=0;i<100;i=i+1) begin
+		$display("\nAz elso 1000 kimenet:");
+		for(i=0;i<1000;i=i+1) begin
 			@(posedge valid) ;
 			$display("%d",rand_out);
 			#101;
