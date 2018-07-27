@@ -32,10 +32,10 @@ module rng #(
 
 	/* blokk RAM a 624 allapotregiszternek */
 	(* RAM_EXTRACT="yes", RAM_STYLE="block" *)reg[31:0] mt[0:623];
-	reg[31:0] rd_data;
-	reg[31:0] wr_data;
 	reg[9:0] rd_addr;
+	reg[31:0] rd_data;
 	wire[9:0] wr_addr;
+	wire[31:0] wr_data;
 	reg wr_en;
 	always@(posedge clk)
 		if(rst)
@@ -47,12 +47,14 @@ module rng #(
 		end
 
 	/* irasi jelek meghajtasa */
+	reg[31:0] wr_data_init, wr_data_gen;
 	assign wr_addr=init_done?(cntr[11:2]-1):(cntr-1);
 	always@(posedge clk)
 		wr_en<=((~init_done)&(cntr<624))|((idx==624)&(~valid)&(cntr[1:0]==2'b11));
 	always@(posedge clk) 
 		if(~init_done)
-			wr_data<=(cntr==0)?SEED:({wr_data[31:2],wr_data[1:0]^wr_data[31:30]}*32'h6C078965+cntr);
+			wr_data_init<=(cntr==0)?SEED:({wr_data_init[31:2],wr_data_init[1:0]^wr_data_init[31:30]}*32'h6C078965+cntr);
+	assign wr_data=init_done?wr_data_gen:wr_data_init;
 
 	/* olvasasi jelek meghajtasa */
 	always@(*)
@@ -95,7 +97,7 @@ module rng #(
 				case(cntr[1:0])
 					1: temp[63:32]<=rd_data;
 					2: temp[31:0]<=rd_data;
-					3: wr_data<=temp[63:32]^{1'b0,temp[31],rd_data[30:1]}^(rd_data[0]?32'h9908B0DF:0);
+					3: wr_data_gen<=temp[63:32]^{1'b0,temp[31],rd_data[30:1]}^(rd_data[0]?32'h9908B0DF:0);
 				endcase
 				if(cntr==2499) idx<=0;
 			end
