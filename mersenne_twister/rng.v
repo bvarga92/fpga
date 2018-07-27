@@ -52,8 +52,7 @@ module rng #(
 	always@(posedge clk)
 		wr_en<=((~init_done)&(cntr<624))|((idx==624)&(~valid)&(cntr[1:0]==2'b11));
 	always@(posedge clk) 
-		if(~init_done)
-			wr_data_init<=(cntr==0)?SEED:({wr_data_init[31:2],wr_data_init[1:0]^wr_data_init[31:30]}*32'h6C078965+cntr);
+		wr_data_init<=(cntr==0)?SEED:({wr_data_init[31:2],wr_data_init[1:0]^wr_data_init[31:30]}*32'h6C078965+cntr);
 	assign wr_data=init_done?wr_data_gen:wr_data_init;
 
 	/* olvasasi jelek meghajtasa */
