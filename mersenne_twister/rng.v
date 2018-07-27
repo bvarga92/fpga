@@ -108,6 +108,7 @@ module rng #(
 					3: begin rand_out<={x[31:14],x[13:0]^x[31:18]}; idx<=idx+1; valid<=1; end
 				endcase
 
+	/* segedfuggveny szimulaciohoz */
 	task print_mt;
 		integer i;
 		for(i=0;i<624;i=i+1) $display("%d",mt[i]);
