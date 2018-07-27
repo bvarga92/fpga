@@ -10,20 +10,77 @@ module rng #(
 	output reg[31:0] rand_out
 );
 
-	reg[9:0] cntr;
-	always@(posedge clk)
-		cntr<=(rst|start|(cntr==623))?0:(cntr+1);
-
+	/* utemezes */
+	reg[9:0] idx;
 	reg init_done;
+	reg[11:0] cntr;
 	always@(posedge clk)
 		if(rst)
+		begin
 			init_done<=0;
-		else if(cntr==623)
+			cntr<=0;
+		end
+		else if((~init_done)&(cntr==624))
+		begin
 			init_done<=1;
+			cntr<=0;
+		end
+		else if(start|(cntr==2503))
+			cntr<=0;
+		else
+			cntr<=cntr+1;
 
-	reg[31:0] mt[0:623]; //ez 20 ezer slice FF... esetleg at lehet irni BRAM alapura
+	/* blokk RAM a 624 allapotregiszternek */
+	(* RAM_EXTRACT="yes", RAM_STYLE="block" *)reg[31:0] mt[0:623];
+	reg[31:0] rd_data;
+	reg[31:0] wr_data;
+	reg[9:0] rd_addr;
+	wire[9:0] wr_addr;
+	reg wr_en;
+	always@(posedge clk)
+		if(rst)
+			rd_data<=0;
+		else
+		begin
+			if(wr_en) mt[wr_addr]<=wr_data;
+			rd_data<=mt[rd_addr];
+		end
+
+	/* irasi jelek meghajtasa */
+	assign wr_addr=init_done?(cntr[11:2]-1):(cntr-1);
+	always@(posedge clk)
+		wr_en<=((~init_done)&(cntr<624))|((idx==624)&(~valid)&(cntr[1:0]==2'b11));
+	always@(posedge clk) 
+		if(~init_done)
+			wr_data<=(cntr==0)?SEED:({wr_data[31:2],wr_data[1:0]^wr_data[31:30]}*32'h6C078965+cntr);
+
+	/* olvasasi jelek meghajtasa */
+	always@(*)
+		if(idx==624)
+			if(cntr[11:2]<227)
+				case(cntr[1:0])
+					0:       rd_addr<=cntr[11:2]+397;
+					1:       rd_addr<=cntr[11:2];
+					default: rd_addr<=cntr[11:2]+1;
+				endcase
+			else if(cntr[11:2]<623)
+				case(cntr[1:0])
+					0:       rd_addr<=cntr[11:2]-227;
+					1:       rd_addr<=cntr[11:2];
+					default: rd_addr<=cntr[11:2]+1;
+				endcase
+			else
+				case(cntr[1:0])
+					0:       rd_addr<=396;
+					1:       rd_addr<=623;
+					default: rd_addr<=0;
+				endcase
+		else
+			rd_addr<=idx;
+
+	/* generalas */
+	reg[63:0] temp;
 	reg[31:0] x;
-	reg[9:0] idx;
 	always@(posedge clk)
 		if(rst)
 		begin
@@ -32,25 +89,19 @@ module rng #(
 		end
 		else if(start)
 			valid<=0;
-		else if(~init_done)
-			if(cntr==0)
-				mt[0]<=SEED;
-			else
-				mt[cntr]<={mt[cntr-1][31:2],mt[cntr-1][1:0]^mt[cntr-1][31:30]}*32'h6C078965+cntr;
-		else if(~valid)
+		else if(init_done & ~valid)
 			if(idx==624)
-					if(cntr<227)
-						mt[cntr]<=mt[cntr+397]^{1'b0,mt[cntr][31],mt[cntr+1][30:1]}^(mt[cntr+1][0]?32'h9908B0DF:0);
-					else if(cntr<623)
-						mt[cntr]<=mt[cntr-227]^{1'b0,mt[cntr][31],mt[cntr+1][30:1]}^(mt[cntr+1][0]?32'h9908B0DF:0);
-					else
-					begin
-						mt[623]<=mt[396]^{1'b0,mt[623][31],mt[0][30:1]}^(mt[0][0]?32'h9908B0DF:0);
-						idx<=0;
-					end
+			begin
+				case(cntr[1:0])
+					1: temp[63:32]<=rd_data;
+					2: temp[31:0]<=rd_data;
+					3: wr_data<=temp[63:32]^{1'b0,temp[31],rd_data[30:1]}^(rd_data[0]?32'h9908B0DF:0);
+				endcase
+				if(cntr==2499) idx<=0;
+			end
 			else
 				case(cntr[1:0])
-					0: x<={mt[idx][31:21],mt[idx][20:0]^mt[idx][31:11]};
+					0: x<={rd_data[31:21],rd_data[20:0]^rd_data[31:11]};
 					1: x[31:7]<=x[31:7]^(x[24:0]&25'h13A58AD);
 					2: x[31:15]<=x[31:15]^(x[16:0]&17'h1DF8C);
 					3: begin rand_out<={x[31:14],x[13:0]^x[31:18]}; idx<=idx+1; valid<=1; end
