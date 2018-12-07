@@ -1,0 +1,3 @@
+# Projektek a Cora Z7-10 kártyára
+
+...
