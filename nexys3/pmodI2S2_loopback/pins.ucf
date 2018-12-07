@@ -1,0 +1,30 @@
+NET "clk100" LOC="V10";
+NET "rst"    LOC="B8";
+
+NET "led<0>" LOC = "U16";
+NET "led<1>" LOC = "V16";
+NET "led<2>" LOC = "U15";
+NET "led<3>" LOC = "V15";
+NET "led<4>" LOC = "M11";
+NET "led<5>" LOC = "N11";
+NET "led<6>" LOC = "R11";
+NET "led<7>" LOC = "T11";
+
+NET "sw<0>" LOC = "T10";
+NET "sw<1>" LOC = "T9";
+NET "sw<2>" LOC = "V9";
+NET "sw<3>" LOC = "M8";
+NET "sw<4>" LOC = "N8";
+NET "sw<5>" LOC = "U8";
+NET "sw<6>" LOC = "V8";
+NET "sw<7>" LOC = "T5";
+
+# a PmodI2S2 modul az A portba kell csatlakoztatni
+NET "dac_mclk"  LOC="T12";
+NET "dac_lrck"  LOC="V12";
+NET "dac_sclk"  LOC="N10";
+NET "dac_sdata" LOC="P11";
+NET "adc_mclk"  LOC="M10";
+NET "adc_lrck"  LOC="N9";
+NET "adc_sclk"  LOC="U11";
+NET "adc_sdata" LOC="V11";
