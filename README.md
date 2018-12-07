@@ -1,9 +1,10 @@
 # FPGA projektek és vegyes HDL modulok
 
 - **cmoda7**: projektek a [Digilent Cmod A7-35T](https://www.xilinx.com/products/boards-and-kits/1-f3zdsm.html) (Artix-7) fejlesztõkártyára
+- **cora_z7_10**: projektek a [Cora Z7-10](https://reference.digilentinc.com/reference/programmable-logic/cora-z7/start) (Zynq) fejlesztõkártyára
 - **mersenne_twister**: 32 bites, egyenletes eloszlású véletlenszámgenerátor (Mersenne Twister algoritmus)
 - **nexys3**: projektek a [Digilent Nexys 3](https://www.xilinx.com/products/boards-and-kits/1-27b7nm.html) (Spartan-6) fejlesztõkártyára
-- **zedboard**: a [ZedBoard](http://zedboard.org/product/zedboard) Zynq SoPC fejleszõkártyára készült projektek
+- **zedboard**: projektek a [ZedBoard](http://zedboard.org/product/zedboard) (Zynq) fejleszõkártyára
 - **cntr_sec.v** és **cntr_sec.vhd**: másodpercszámláló Verilog és VHDL nyelven
 - **knightrider.v** és **knightrider.vhd**: futófény Verilog és VHDL nyelven
 - **pwm.v**: paraméterezhetõ, 8 csatornás PWM modul

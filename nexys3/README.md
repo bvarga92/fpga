@@ -1,4 +1,4 @@
-# FPGA projektek és vegyes HDL modulok
+# Projektek Nexys 3-ra
 
 - **pmodAD1_audio_fft**: 64 pontos audio spektrumanalizátor RGB LED mátrix kijelzéssel, PmodAD1 ADC modullal ([videó](https://www.youtube.com/watch?v=fEciQDGBcTs&list=PL9_VlVdB8s882QMHiqJlDpJeKWxwP5CIG))
 - **pmodALS_test**: mintaprojekt a Digilent PmodALS megvilágításmérõ modulhoz
