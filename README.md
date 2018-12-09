@@ -2,6 +2,7 @@
 
 - **cmoda7**: projektek a [Digilent Cmod A7-35T](https://www.xilinx.com/products/boards-and-kits/1-f3zdsm.html) (Artix-7) fejlesztõkártyára
 - **cora_z7_10**: projektek a [Cora Z7-10](https://reference.digilentinc.com/reference/programmable-logic/cora-z7/start) (Zynq) fejlesztõkártyára
+- **fifo**: paraméterezhetõ FIFO modul
 - **mersenne_twister**: 32 bites, egyenletes eloszlású véletlenszámgenerátor (Mersenne Twister algoritmus)
 - **nexys3**: projektek a [Digilent Nexys 3](https://www.xilinx.com/products/boards-and-kits/1-27b7nm.html) (Spartan-6) fejlesztõkártyára
 - **zedboard**: projektek a [ZedBoard](http://zedboard.org/product/zedboard) (Zynq) fejleszõkártyára
