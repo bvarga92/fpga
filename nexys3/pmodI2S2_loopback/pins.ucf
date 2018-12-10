@@ -19,7 +19,7 @@ NET "sw<5>" LOC = "U8";
 NET "sw<6>" LOC = "V8";
 NET "sw<7>" LOC = "T5";
 
-# a PmodI2S2 modul az A portba kell csatlakoztatni
+# a PmodI2S2 modult az A portba kell csatlakoztatni
 NET "dac_mclk"  LOC="T12";
 NET "dac_lrck"  LOC="V12";
 NET "dac_sclk"  LOC="N10";

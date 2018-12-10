@@ -1,7 +1,7 @@
 NET "clk100" LOC="V10";
 NET "rst"    LOC="B8";
 
-# a PmodI2S2 modul az A portba kell csatlakoztatni
+# a PmodI2S2 modult az A portba kell csatlakoztatni
 NET "dac_mclk"  LOC="T12";
 NET "dac_lrck"  LOC="V12";
 NET "dac_sclk"  LOC="N10";
