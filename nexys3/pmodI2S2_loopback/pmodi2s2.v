@@ -57,8 +57,8 @@ module pmodi2s2(
     always@(posedge clk)
         if(rst|(cntr==2046))
         begin
-            adc_l<=adc_shr[62:39];//62:39
-            adc_r<=adc_shr[30:7];//30:7
+            adc_l<=adc_shr[62:39];
+            adc_r<=adc_shr[30:7];
         end
 
     /* dac_rd_adc_wr impulzus */

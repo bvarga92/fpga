@@ -4,7 +4,7 @@ module toplevel_tb;
     reg clk100;
     reg rst;
     reg adc_sdata;
-     reg[7:0] sw;
+    reg[7:0] sw;
 
     wire dac_mclk;
     wire dac_lrck;
@@ -13,7 +13,7 @@ module toplevel_tb;
     wire adc_mclk;
     wire adc_lrck;
     wire adc_sclk;
-     wire[7:0] led;
+    wire[7:0] led;
 
     toplevel uut(
         .clk100(clk100), 
@@ -26,8 +26,8 @@ module toplevel_tb;
         .adc_lrck(adc_lrck), 
         .adc_sclk(adc_sclk), 
         .adc_sdata(adc_sdata),
-          .sw(sw),
-          .led(led)
+        .sw(sw),
+        .led(led)
     );
 
     task i2s_transmit(input[23:0] data_l, input[23:0] data_r);
@@ -46,7 +46,7 @@ module toplevel_tb;
         clk100=0;
         rst=1;
         adc_sdata=0;
-          sw=0;
+        sw=0;
         #100;
         rst=0;
         i2s_transmit(23'h555555, 23'h123456);

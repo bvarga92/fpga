@@ -17,18 +17,18 @@ module pmodi2s2_tb;
     wire dac_rd_adc_wr;
 
     pmodi2s2 uut(
-         .clk(clk), 
-         .rst(rst), 
-         .mclk(mclk), 
-         .lrck(lrck), 
-         .sclk(sclk), 
-         .dac_l(dac_l), 
-         .dac_r(dac_r), 
-         .dac_sdata(dac_sdata), 
-         .adc_sdata(adc_sdata), 
-         .adc_l(adc_l), 
-         .adc_r(adc_r), 
-         .dac_rd_adc_wr(dac_rd_adc_wr)
+        .clk(clk), 
+        .rst(rst), 
+        .mclk(mclk), 
+        .lrck(lrck), 
+        .sclk(sclk), 
+        .dac_l(dac_l), 
+        .dac_r(dac_r), 
+        .dac_sdata(dac_sdata), 
+        .adc_sdata(adc_sdata), 
+        .adc_l(adc_l), 
+        .adc_r(adc_r), 
+        .dac_rd_adc_wr(dac_rd_adc_wr)
     );
 
     task i2s_transmit(input[23:0] data_l, input[23:0] data_r);
