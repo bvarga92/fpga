@@ -61,7 +61,7 @@ module toplevel(
 		end
 		else if(dac_rd_adc_wr_dl[0] & ~empty_dl) begin
 			if(velocity==0) begin
-				note_off<=(key==key_reg);
+				note_off<=note_off|(key==key_reg);
 				newnote<=0;
 			end
 			else begin
