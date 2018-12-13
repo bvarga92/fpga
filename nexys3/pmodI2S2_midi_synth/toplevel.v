@@ -29,7 +29,7 @@ module toplevel(
 	);
 
 	midi_rx midi_rx_i(
-		.clk(clk),
+		.clk(clk), //TODO: az UART vevo 100 MHz-es orajelre van tervezve, de igy is mukodik
 		.rst(rst),
 		.rx(midi_in),
 		.rx_byte(midi_rx_byte),
