@@ -1,0 +1,7 @@
+NET "clk" LOC = "V10";
+NET "rst" LOC = "B8"; # kozepso nyomogomb
+
+# PmodA port
+NET "max7219_din" LOC = "T12"; # JA1
+NET "max7219_cs" LOC = "V12"; # JA2
+NET "max7219_sclk" LOC = "N10"; # JA3

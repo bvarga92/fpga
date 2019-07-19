@@ -1,5 +1,6 @@
 # Projektek Nexys 3-ra
 
+- **max7219_ledmatrix**: monokróm LED mátrix vezérlése MAX7219 meghajtóval
 - **pmodAD1_audio_fft**: 64 pontos audio spektrumanalizátor RGB LED mátrix kijelzéssel, PmodAD1 ADC modullal ([videó](https://www.youtube.com/watch?v=fEciQDGBcTs&list=PL9_VlVdB8s882QMHiqJlDpJeKWxwP5CIG))
 - **pmodALS_test**: mintaprojekt a Digilent PmodALS megvilágításmérõ modulhoz
 - **pmodDA4_dds**: kétcsatornás DDS jelgenerátor PmodDA4 DAC modullal ([videó](https://www.youtube.com/watch?v=8Ri7BkQX_lQ&list=PL9_VlVdB8s882QMHiqJlDpJeKWxwP5CIG))
